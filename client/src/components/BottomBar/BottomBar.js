@@ -72,6 +72,14 @@ const BottomBar = ({
           </div>
           Share Screen
         </ScreenButton>
+        <RecordButton onClick={}>
+          <div>
+              <FaIcon
+                className="fas fa-record-vinyl"
+              ></FaIcon>
+          </div>
+          Record
+        </RecordButton>
       </Center>
       <Right>
         <StopButton onClick={goToBack}>Leave</StopButton>
@@ -138,6 +146,19 @@ align-content: center;
 
   .sharing {
     color: #ee2560;
+  }
+`;
+
+const RecordButton = styled.div`
+align-text: center;
+  width: auto;
+  border: none;
+  font-size: 0.9375rem;
+  padding: 5px;
+  :hover {
+    background-color: #8F92F3;
+    cursor: pointer;
+    border-radius: 15px;
   }
 `;
 
