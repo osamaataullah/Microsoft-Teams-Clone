@@ -1,7 +1,6 @@
-// Imports
+
 import React from 'react';
 import styled from 'styled-components';
-//--------------------------------------------------------------------------
 
 const UpperBar = ({
     MeetTitle,
@@ -23,8 +22,7 @@ const UpperBar = ({
     );
 };
 
-//-----------------------------------------------------------------------------------
-// Styled Components
+
 
 const Bar = styled.div`
   position: absolute;
