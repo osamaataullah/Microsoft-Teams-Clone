@@ -48,7 +48,9 @@ const Home=(props) => {
             <div className="row">
                 <div className="col-12">
                     <nav className="main-nav">
-                        
+                        <a href="#" className="logo">
+                            <img src="images\WeTalk_logo.png"></img>
+                        </a>
                         <a href="#" className="logo">
                             WeTalk Video chat
                         </a>
@@ -173,15 +175,15 @@ const Home=(props) => {
                     <div className="col-lg-2 col-md-3 col-sm-6 col-6">
                         <a href="#" className="mini-box">
                             <i><img src="images\work-process-item-01.png" alt="" /></i>
-                            <strong>TBA</strong>
-                            <span>Meeting Godard pabst prism fam cliche.</span>
+                            <strong>Responsive Design</strong>
+                            <span>Join from any device</span>
                         </a>
                     </div>
                     <div className="col-lg-2 col-md-3 col-sm-6 col-6">
                         <a href="#" className="mini-box">
                             <i><img src="images\work-process-item-01.png" alt="" /></i>
-                            <strong>TBA</strong>
-                            <span>Meeting Godard pabst prism fam cliche.</span>
+                            <strong>Custom Meeting Name</strong>
+                            <span>Share meet name to invite others</span>
                         </a>
                     </div>
                 </div>
@@ -195,8 +197,8 @@ const Home=(props) => {
             <div className="row">
                 <div className="col-lg-12 col-md-12 col-sm-12">
                     <ul className="social">
-                        <li><a href="#"><i className="fa fa-github"></i></a></li>
-                        <li><a href="#"><i className="fa fa-linkedin"></i></a></li>
+                        <li><a href="https://github.com/AJgthb2002/We-Talk" target="_blank"><i className="fa fa-github"></i></a></li>
+                        <li><a href="https://www.linkedin.com/in/ananya-a-joshi" target="_blank"><i className="fa fa-linkedin"></i></a></li>
                     </ul>
                 </div>
             </div>
