@@ -323,7 +323,7 @@ const MeetRoom = (props) => {
       <VideoAndBarContainer>
       <UpperBar MeetTitle={roomId} MemberCount={`${peers.length+1}`}/>
         <VideoContainer>
-          {/* Current User Video */}
+     
           <VideoBox
             className={`width-peer${peers.length > 8 ? '' : peers.length}`}
           >
@@ -339,7 +339,7 @@ const MeetRoom = (props) => {
               playInline
             ></MyVideo>
           </VideoBox>
-          {/* Joined User Vidoe */}
+     
           {peers &&
             peers.map((peer, index, arr) => createUserVideo(peer, index, arr))}
         </VideoContainer>
