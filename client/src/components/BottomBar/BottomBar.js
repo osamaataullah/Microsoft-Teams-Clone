@@ -79,14 +79,14 @@ const BottomBar = ({
           Share Screen
         </ScreenButton>
 
-        <RecordButton >
+        {/* <RecordButton >
           <div>
               <FaIcon
                 className="fas fa-record-vinyl"
               ></FaIcon>
           </div>
           Record
-        </RecordButton>
+        </RecordButton> */}
 
       </Center>
 
@@ -159,18 +159,18 @@ const ScreenButton = styled.div`
   }
 `;
 
-const RecordButton = styled.div`
-align-text: center;
-  width: auto;
-  border: none;
-  font-size: 0.9375rem;
-  padding: 5px;
-  :hover {
-    background-color: #8F92F3;
-    cursor: pointer;
-    border-radius: 15px;
-  }
-`;
+// const RecordButton = styled.div`
+// align-text: center;
+//   width: auto;
+//   border: none;
+//   font-size: 0.9375rem;
+//   padding: 5px;
+//   :hover {
+//     background-color: #8F92F3;
+//     cursor: pointer;
+//     border-radius: 15px;
+//   }
+// `;
 
 const FaIcon = styled.i`
   width: 30px;
