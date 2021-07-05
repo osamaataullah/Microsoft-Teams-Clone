@@ -1,5 +1,7 @@
+// Imports
 import React from 'react';
 import styled from 'styled-components';
+//--------------------------------------------------------------------------
 
 const UpperBar = ({
     MeetTitle,
@@ -20,6 +22,10 @@ const UpperBar = ({
         </Bar>
     );
 };
+
+//-----------------------------------------------------------------------------------
+// Styled Components
+
 const Bar = styled.div`
   position: absolute;
   padding: 10px;
