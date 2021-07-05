@@ -1,6 +1,8 @@
+// Imports
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import './BottomBar.css';
+//-----------------------------------------------------------------------
 
 const BottomBar = ({
   clickChat,
@@ -13,8 +15,7 @@ const BottomBar = ({
   showVideoDevices,
   setShowVideoDevices
 }) => {
-  const handleToggle = useCallback(
-    (e) => {
+  const handleToggle = useCallback((e) => {
       setShowVideoDevices((state) => !state);
     },
     [setShowVideoDevices]
@@ -22,7 +23,9 @@ const BottomBar = ({
 
   return (
     <Bar>
+    
       <Left>
+    
         <CameraButton onClick={toggleCameraAudio} data-switch='video'>
           <div>
             {userVideoAudio.video ? (
@@ -33,6 +36,7 @@ const BottomBar = ({
           </div>
           Camera
         </CameraButton>
+
         {showVideoDevices && (
           <SwitchList>
             {videoDevices.length > 0 &&
@@ -43,9 +47,11 @@ const BottomBar = ({
             <div>Switch Camera</div>
           </SwitchList>
         )}
+        
         <SwitchMenu onClick={handleToggle}>
           <i className='fas fa-angle-up'></i>
         </SwitchMenu>
+
         <CameraButton onClick={toggleCameraAudio} data-switch='audio'>
           <div>
             {userVideoAudio.audio ? (
@@ -56,14 +62,18 @@ const BottomBar = ({
           </div>
           Audio
         </CameraButton>
+
       </Left>
+
       <Center>
+            
         <ChatButton onClick={clickChat}>
           <div>
             <FaIcon className='fas fa-comments'></FaIcon>
           </div>
           Chat
         </ChatButton>
+
         <ScreenButton onClick={clickScreenSharing}>
           <div>
             <FaIcon
@@ -72,6 +82,7 @@ const BottomBar = ({
           </div>
           Share Screen
         </ScreenButton>
+        
         <RecordButton>
           <div>
               <FaIcon
@@ -80,13 +91,19 @@ const BottomBar = ({
           </div>
           Record
         </RecordButton>
+        
       </Center>
+      
       <Right>
         <StopButton onClick={goToBack}>Leave</StopButton>
       </Right>
+      
     </Bar>
   );
 };
+
+// ---------------------------------------------------------------------------------
+// Styled components
 
 const Bar = styled.div`
   position: absolute;
