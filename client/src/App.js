@@ -1,21 +1,32 @@
-//Imports
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Home from './components/Home/Home';
-import MeetRoom from './components/MeetRoom/MeetRoom';
-//---------------------------------------------------------------------------
+import Main from './components/Home/Home';
+import Room from './components/MeetRoom/MeetRoom'
+// import styled from 'styled-components';
 
 function App() {
   return (
     <BrowserRouter>
-      {/* Loads the appropriate page depending on the path/url */}
+      {/* <AppContainer> */}
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/room/:roomId" component={MeetRoom} />
+          <Route exact path="/" component={Main} />
+          <Route exact path="/room/:roomId" component={Room} />
         </Switch>
-
+      {/* </AppContainer> */}
     </BrowserRouter>
   );
 }
+
+// const AppContainer = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   min-height: 100vh;
+//   align-items: center;
+//   justify-content: center;
+//   font-size: calc(8px + 2vmin);
+//   color: white;
+//   background-color: #454552;
+//   text-align: center;
+// `;
 
 export default App;
