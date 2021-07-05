@@ -1,6 +1,8 @@
+// Imports
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import socket from '../../socket';
+//-------------------------------------------------------------------------------
 
 const Chat = ({ display, roomId }) => {
   const currentUser = sessionStorage.getItem('user');
@@ -8,6 +10,7 @@ const Chat = ({ display, roomId }) => {
   const messagesEndRef = useRef(null);
   const inputRef = useRef();
   
+  // receiving a chat message
   useEffect(() => {
     socket.on('FE-receive-message', ({ msg, sender }) => {
       setMsg((msgs) => [...msgs, { sender, msg }]);
@@ -21,21 +24,26 @@ const Chat = ({ display, roomId }) => {
     messagesEndRef.current.scrollIntoView({ behavior: 'smooth'});
   }
 
+  // sending chat message
   const sendMessage = (e) => {
     if (e.key === 'Enter') {
       const msg = e.target.value;
 
       if (msg) {
         socket.emit('BE-send-message', { roomId, msg, sender: currentUser });
+        // make input field blank
         inputRef.current.value = '';
       }
     }
   };
 
   return (
+    // display chat container only when chat button is pressed
     <ChatContainer className={display ? '' : 'width0'}>
+    
       <TopHeader>Chat Room</TopHeader>
       <ChatArea>
+        
         <MessageList>
           {msg &&
             msg.map(({ sender, msg }, idx) => {
@@ -55,17 +63,24 @@ const Chat = ({ display, roomId }) => {
                 );
               }
             })}
+            
             <div style={{float:'left', clear: 'both'}} ref={messagesEndRef} />
         </MessageList>
+
       </ChatArea>
+
       <BottomInput
         ref={inputRef}
         onKeyUp={sendMessage}
         placeholder="Enter your message"
       />
+          
     </ChatContainer>
   );
 };
+
+//-----------------------------------------------------------------------------------------------
+// Styled Components
 
 const ChatContainer = styled.div`
   display: flex;
