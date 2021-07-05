@@ -1,5 +1,7 @@
+// Imports
 import React, {useRef, useState, useEffect} from 'react';
 import socket from '../../socket';
+//-----------------------------------------------------------------------------
 
 const Home=(props) => {
     const roomRef = useRef();
@@ -24,10 +26,11 @@ const Home=(props) => {
       }, [props.history]);
 
     function clickJoin() {
+	// set the meeting title and username
         const roomName = roomRef.current.value;
         const userName = userRef.current.value;
-        
-    
+	    
+        // if meet title or username is not entered, generate an error message
         if (!roomName || !userName) {
           setErr(true);
           setErrMsg('Enter both Username and Meeting Title');
@@ -38,10 +41,7 @@ const Home=(props) => {
         props.history.push(`/room/${roomName}`);
         }
       }
-    
-
-   
-	    return (
+	return (
 		<>
     <header className="header-area header-sticky">
         <div className="container">
