@@ -72,7 +72,7 @@ const BottomBar = ({
           </div>
           Share Screen
         </ScreenButton>
-        <RecordButton onClick={}>
+        <RecordButton>
           <div>
               <FaIcon
                 className="fas fa-record-vinyl"
