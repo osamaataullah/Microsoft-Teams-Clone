@@ -1,8 +1,8 @@
-// Imports
+
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import './BottomBar.css';
-//-----------------------------------------------------------------------
+
 
 const BottomBar = ({
   clickChat,
@@ -102,8 +102,6 @@ const BottomBar = ({
   );
 };
 
-// ---------------------------------------------------------------------------------
-// Styled components
 
 const Bar = styled.div`
   position: absolute;
