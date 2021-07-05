@@ -1,4 +1,4 @@
-// Imports
+
 import React, { useState, useEffect, useRef } from 'react';
 import Peer from 'simple-peer';
 import styled from 'styled-components';
@@ -7,7 +7,7 @@ import VideoCard from '../Video/VideoCard';
 import BottomBar from '../BottomBar/BottomBar';
 import Chat from '../Chat/Chat';
 import UpperBar from '../UpperBar/UpperBar';
-//-----------------------------------------------------------------------------
+
 
 const MeetRoom = (props) => {
   const currentUser = sessionStorage.getItem('user');
@@ -26,16 +26,16 @@ const MeetRoom = (props) => {
   const roomId = props.match.params.roomId;
 
   useEffect(() => {
-    // Get Video Devices
+
     navigator.mediaDevices.enumerateDevices().then((devices) => {
       const filtered = devices.filter((device) => device.kind === 'videoinput');
       setVideoDevices(filtered);
     });
 
-    // Set Back Button Event
+
     window.addEventListener('popstate', goToBack);
 
-    // Connect Camera & Mic
+
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
       .then((stream) => {
@@ -205,13 +205,13 @@ const MeetRoom = (props) => {
     }
   }
 
-  // Open Chat Window
+
   const clickChat = (e) => {
     e.stopPropagation();
     setDisplayChat(!displayChat);
   };
 
-  // Leave Room
+
   const goToBack = (e) => {
     e.preventDefault();
     socket.emit('BE-leave-room', { roomId, leaver: currentUser });
@@ -219,7 +219,7 @@ const MeetRoom = (props) => {
     window.location.href = '/';
   };
 
-  // switch mic on/off
+  
   const toggleCameraAudio = (e) => {
     const target = e.target.getAttribute('data-switch');
 
@@ -251,7 +251,7 @@ const MeetRoom = (props) => {
     socket.emit('BE-toggle-camera-audio', { roomId, switchTarget: target });
   };
 
-  // screensharing
+
   const clickScreenSharing = () => {
     if (!screenShare) {
       navigator.mediaDevices
@@ -294,7 +294,6 @@ const MeetRoom = (props) => {
     }
   };
 
-  // full screen view
   const expandScreen = (e) => {
     const elem = e.target;
 
@@ -360,9 +359,6 @@ const MeetRoom = (props) => {
     </RoomContainer>
   );
 };
-
-//--------------------------------------------------------------------------------------------------
-// Styled Components
 
 const RoomContainer = styled.div`
   display: flex;
