@@ -1,3 +1,4 @@
+// Imports
 import React, { useState, useEffect, useRef } from 'react';
 import Peer from 'simple-peer';
 import styled from 'styled-components';
@@ -6,6 +7,7 @@ import VideoCard from '../Video/VideoCard';
 import BottomBar from '../BottomBar/BottomBar';
 import Chat from '../Chat/Chat';
 import UpperBar from '../UpperBar/UpperBar';
+//-----------------------------------------------------------------------------
 
 const MeetRoom = (props) => {
   const currentUser = sessionStorage.getItem('user');
@@ -42,7 +44,7 @@ const MeetRoom = (props) => {
 
         socket.emit('BE-join-room', { roomId, userName: currentUser });
         socket.on('FE-user-join', (users) => {
-          // all users
+         
           const peers = [];
           users.forEach(({ userId, info }) => {
             let { userName, video, audio } = info;
@@ -133,7 +135,7 @@ const MeetRoom = (props) => {
     return () => {
       socket.disconnect();
     };
-    // eslint-disable-next-line
+
   }, []);
 
   function createPeer(userId, caller, stream) {
@@ -203,13 +205,13 @@ const MeetRoom = (props) => {
     }
   }
 
-  // Open Chat
+  // Open Chat Window
   const clickChat = (e) => {
     e.stopPropagation();
     setDisplayChat(!displayChat);
   };
 
-  // BackButton
+  // Leave Room
   const goToBack = (e) => {
     e.preventDefault();
     socket.emit('BE-leave-room', { roomId, leaver: currentUser });
@@ -217,6 +219,7 @@ const MeetRoom = (props) => {
     window.location.href = '/';
   };
 
+  // switch mic on/off
   const toggleCameraAudio = (e) => {
     const target = e.target.getAttribute('data-switch');
 
@@ -248,6 +251,7 @@ const MeetRoom = (props) => {
     socket.emit('BE-toggle-camera-audio', { roomId, switchTarget: target });
   };
 
+  // screensharing
   const clickScreenSharing = () => {
     if (!screenShare) {
       navigator.mediaDevices
@@ -266,7 +270,7 @@ const MeetRoom = (props) => {
             );
           });
 
-          // Listen click end
+          // Listen for click on end
           screenTrack.onended = () => {
             peersRef.current.forEach(({ peer }) => {
               peer.replaceTrack(
@@ -290,6 +294,7 @@ const MeetRoom = (props) => {
     }
   };
 
+  // full screen view
   const expandScreen = (e) => {
     const elem = e.target;
 
@@ -355,6 +360,9 @@ const MeetRoom = (props) => {
     </RoomContainer>
   );
 };
+
+//--------------------------------------------------------------------------------------------------
+// Styled Components
 
 const RoomContainer = styled.div`
   display: flex;
