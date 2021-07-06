@@ -52,7 +52,7 @@ const Home=(props) => {
                             <img src="images\WeTalk_logo.png"></img>
                         </a>
                         <a href="#" className="logo">
-                            WeTalk Video chat
+                            WeTalk Video Chat
                         </a>
                         
                         <ul className="nav">
@@ -109,7 +109,7 @@ const Home=(props) => {
                                 </div>
                                 <div className="form-floating">
                                 <label for="floatingPassword"><b>Meeting Title</b></label>
-                                <input type="text" className="form-control" id="roomName" ref={roomRef} placeholder="e.g. June Mentoring session" />
+                                <input type="text" className="form-control" id="roomName" ref={roomRef} placeholder="e.g. Engage AMA Session" />
                                 
                                 </div>
                                 <br />
@@ -168,8 +168,8 @@ const Home=(props) => {
                     <div className="col-lg-2 col-md-3 col-sm-6 col-6">
                         <a href="#" className="mini-box">
                             <i><img src="images\work-process-item-01.png" alt="" /></i>
-                            <strong>Recording</strong>
-                            <span>Start and stop recording the meet anytime</span>
+                            <strong>Multiple Browser compatibility</strong>
+                            <span></span>
                         </a>
                     </div>
                     <div className="col-lg-2 col-md-3 col-sm-6 col-6">
