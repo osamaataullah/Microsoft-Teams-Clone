@@ -1,6 +1,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import TimeBox from '../TimeBox/TimeBox.js';
 
 const UpperBar = ({
     MeetTitle,
@@ -17,6 +18,7 @@ const UpperBar = ({
             <Right>
                 <div>Members: {MemberCount}</div>
             </Right>
+            <TimeBox />
 
         </Bar>
     );
