@@ -49,6 +49,7 @@ const Title= styled.div`
 `;
 const Right = styled.div`
 color:white;
+margin-right: 20px;
 `;
 
 export default UpperBar;
