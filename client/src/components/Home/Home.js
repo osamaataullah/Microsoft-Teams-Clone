@@ -48,12 +48,12 @@ const Home=(props) => {
             <div className="row">
                 <div className="col-12">
                     <nav className="main-nav">
-                        <a href="#" className="logo">
+                        <div className="logo">
                             <img src="images\WeTalk_logo.png"></img>
-                        </a>
-                        <a href="#" className="logo">
+                        </div>
+                        <div className="logo">
                             WeTalk Video Chat
-                        </a>
+                        </div>
                         
                         <ul className="nav">
                             <li><a href="#welcome" className="active">Home</a></li>
@@ -145,46 +145,46 @@ const Home=(props) => {
                 
                 <div className="row">
                     <div className="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <a href="#" className="mini-box">
+                        <div className="mini-box">
                             <i><img src="images\work-process-item-01.png" alt="" /></i>
                             <strong>Group Meetings</strong>
                             <span>Connect with upto 6 people</span>
-                        </a>
+                        </div>
                     </div>
                     <div className="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <a href="#" className="mini-box">
+                        <div className="mini-box">
                             <i><img src="images\work-process-item-01.png" alt="" /></i>
                             <strong>Group Chat</strong>
                             <span>Chat with all members during the meet</span>
-                        </a>
+                        </div>
                     </div>
                     <div className="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <a href="#" className="mini-box">
+                        <div className="mini-box">
                             <i><img src="images\work-process-item-01.png" alt="" /></i>
                             <strong>Screen Sharing</strong>
                             <span>Present your screen in a single click</span>
-                        </a>
+                        </div>
                     </div>
                     <div className="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <a href="#" className="mini-box">
+                        <div className="mini-box">
                             <i><img src="images\work-process-item-01.png" alt="" /></i>
                             <strong>Multiple Browser compatibility</strong>
                             <span></span>
-                        </a>
+                        </div>
                     </div>
                     <div className="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <a href="#" className="mini-box">
+                        <div className="mini-box">
                             <i><img src="images\work-process-item-01.png" alt="" /></i>
                             <strong>Responsive Design</strong>
                             <span>Join from any device</span>
-                        </a>
+                        </div>
                     </div>
                     <div className="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <a href="#" className="mini-box">
+                        <div className="mini-box">
                             <i><img src="images\work-process-item-01.png" alt="" /></i>
                             <strong>Custom Meeting Name</strong>
                             <span>Share meet name to invite others</span>
-                        </a>
+                        </div>
                     </div>
                 </div>
                
