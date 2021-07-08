@@ -197,7 +197,7 @@ const Home=(props) => {
             <div className="row">
                 <div className="col-lg-12 col-md-12 col-sm-12">
                     <ul className="social">
-                        <li><a href="https://github.com/AJgthb2002/We-Talk" target="_blank"><i className="fa fa-github"></i></a></li>
+                        <li><a href="https://github.com/AJgthb2002/WeTalk" target="_blank"><i className="fa fa-github"></i></a></li>
                         <li><a href="https://www.linkedin.com/in/ananya-a-joshi" target="_blank"><i className="fa fa-linkedin"></i></a></li>
                     </ul>
                 </div>
