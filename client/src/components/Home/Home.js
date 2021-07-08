@@ -13,8 +13,8 @@ const Home=(props) => {
 
         socket.on('FE-error-user-exist', ({ error }) => {
           if (!error) {
-            const roomName = (roomRef.current.value?roomRef.current.value:" ");
-            const userName = (userRef.current.value? userRef.current.value:" ");
+            const roomName = (roomRef.current != null?roomRef.current.value:" ");
+            const userName = (userRef.current != null? userRef.current.value:" ");
     
             sessionStorage.setItem('user', userName);
             props.history.push(`/room/${roomName}`);
