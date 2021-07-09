@@ -99,17 +99,17 @@ const Home=(props) => {
                         <div className="col-lg-6 col-md-6 col-sm-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.2s">
                             <div className="features-small-item">
                                 <div >
-                                    <img src="images\start_video_call.svg" alt="" height="100%" width="80%" />
+                                    <img src="images\Video_meet.jpg" alt="" height="100%" width="100%" />
                                 </div>
-                                <br />
-                                <div className="form-floating mb-3">
-                                <label for="floatingInput"><b>Username</b></label>
+                               
+                                <div className="form-floating mb-3" >
+                                <label style={{fontSize: "20px"}}><b>Username</b></label>
                                 <input type="text" className="form-control" id="userName" ref={userRef} placeholder="e.g. socialbutterfly" />
                                 
                                 </div>
                                 <div className="form-floating">
-                                <label for="floatingPassword"><b>Meeting Title</b></label>
-                                <input type="text" className="form-control" id="roomName" ref={roomRef} placeholder="e.g. Engage AMA Session" />
+                                <label style={{fontSize: "20px"}}><b>Meeting Title</b></label>
+                                <input type="text" className="form-control" id="roomName" ref={roomRef} placeholder="e.g. June Mentoring session" />
                                 
                                 </div>
                                 <br />
