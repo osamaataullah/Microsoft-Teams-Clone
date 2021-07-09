@@ -111,7 +111,7 @@ const Home=(props) => {
                                 </div>
                                 <div className="form-floating">
                                 <label style={{fontSize: "20px"}}><b>Meeting Title</b></label>
-                                <input type="text" className="form-control" id="roomName" ref={roomRef} placeholder="e.g. June Mentoring session" />
+                                <input type="text" className="form-control" id="roomName" ref={roomRef} placeholder="e.g. Engage AMA session" />
                                 
                                 </div>
                                 <br />
