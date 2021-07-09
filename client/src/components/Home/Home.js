@@ -98,8 +98,10 @@ const Home=(props) => {
                       
                         <div className="col-lg-6 col-md-6 col-sm-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.2s">
                             <div className="features-small-item">
+				
                                 <div >
                                     <img src="images\Video_meet.jpg" alt="" height="100%" width="100%" />
+			            {/* Abstract vector created by vectorjuice - www.freepik.com */}
                                 </div>
                                
                                 <div className="form-floating mb-3" >
