@@ -4,7 +4,7 @@
 <div align="left"> WeTalk is a video chatting web application developed for <b> Microsoft Engage 2021 </b> program. 
  </br>
 </br> <b> Agile SCRUM methodology was used for this project. </b> </br> It was built in 4 sprints, each sprint consisting of design, build , test & review phases.
-</br> <a href="https://github.com/AJgthb2002/we-talk-temp/blob/5539b4e870f691fe370f69a88be064a4c332089f/documentation/Microsoft%20Engage%202021%20challenge-%20Agile%20Methodology.pdf"> How I used Agile SCRUM for this project </a>
+</br> <a href="https://github.com/AJgthb2002/WeTalk/blob/4f7422b6537b01926390cbb1611b7238d82c919c/documentation/Microsoft%20Engage%202021%20challenge-%20Agile%20Methodology.pdf"> How I used Agile SCRUM for this project </a>
 </div> 
 </br>
 <div align="left"> This project is Deployed at: https://wetalk01.herokuapp.com/
@@ -15,11 +15,11 @@
 ### Screenshots
 1. **Home Page** 
 
-![alt text](https://github.com/AJgthb2002/we-talk-temp/blob/b83e2aeb85adb15f915c61454cc51b59874e5fe1/screenshots/Home_screen_3.png)  
+![alt text](https://github.com/AJgthb2002/WeTalk/blob/4f7422b6537b01926390cbb1611b7238d82c919c/screenshots/Home_screen_3.png)  
 
 2. **Meeting Room Screen**
 
-![alt text](https://github.com/AJgthb2002/we-talk-temp/blob/fb12c7127c813940bf40d49fe441330db0f3e76b/screenshots/Meet_screen2.png)  
+![alt text](https://github.com/AJgthb2002/WeTalk/blob/4f7422b6537b01926390cbb1611b7238d82c919c/screenshots/Meet_screen2.png)  
 ***
 ## Functional Features:
 :white_check_mark: **Mandatory Feature**: Minimum 2 participants should be able to connect and have a video conversation.
@@ -39,7 +39,7 @@
 12. **Responsive Design**: Users can join meeting from any device. 📱 💻
 
 ***
-![](https://github.com/AJgthb2002/we-talk-temp/blob/67086f845d8745a89853881703039b98cf75c90f/screenshots/webapp_flow.png)
+![](https://github.com/AJgthb2002/WeTalk/blob/4f7422b6537b01926390cbb1611b7238d82c919c/screenshots/webapp_flow.png)
 ***
 ### Tech Stack:
 | Name | Version | Description
@@ -56,7 +56,7 @@
 **This is how socket.io works:** </br>
 On the server-side, Socket.IO works by adding event listeners to an instance of http.Server. The HTTP server will begin to serve the client library at /socket.io/socket.io.js. The global socket variable is an EventEmitter-like object. Since both the server and client's Socket object act as EventEmitters, you can emit and listen for events in a bi-directional manner. We can send any JSON serialisable object to and from the server. This includes strings, numbers, arrays and booleans. </br>
 
-<img src="https://github.com/AJgthb2002/we-talk-temp/blob/dd798dad34651824b3cc2c05f73db4efd8ca4f6c/screenshots/socketio_working_1.png" alt="drawing" width="500" height="300"/>
+<img src="https://github.com/AJgthb2002/WeTalk/blob/4f7422b6537b01926390cbb1611b7238d82c919c/screenshots/socketio_working_1.png" alt="socketio_working" width="500" height="300"/>
  
 ***
 ### Future Enhancements :dart::
@@ -99,5 +99,5 @@ Features to be implemented:
 - Open your local host port 3000 from your browser
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
-[How I used Agile SCRUM in this project]:""
+
  
