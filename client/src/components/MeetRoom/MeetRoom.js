@@ -370,7 +370,7 @@ const RoomContainer = styled.div`
 
 const VideoContainer = styled.div`
   max-width: 100%;
-  height: 92%;
+  height: 86%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
