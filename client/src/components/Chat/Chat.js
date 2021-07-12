@@ -1,48 +1,49 @@
-
+//imports
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import socket from '../../socket';
-
+//------------------------------------------------------------------------------
 
 const Chat = ({ display, roomId }) => {
   const currentUser = sessionStorage.getItem('user');
   const [msg, setMsg] = useState([]);
   const messagesEndRef = useRef(null);
   const inputRef = useRef();
-  
 
+  // when a new message is received
   useEffect(() => {
-    socket.on('FE-receive-message', ({ msg, sender }) => {
+    socket.on('message-received', ({ msg, sender }) => {
       setMsg((msgs) => [...msgs, { sender, msg }]);
     });
   }, []);
 
 
-  useEffect(() => {scrollToBottom()}, [msg])
+  useEffect(() => { scrollToBottom() }, [msg])
 
   const scrollToBottom = () => {
-    messagesEndRef.current.scrollIntoView({ behavior: 'smooth'});
+    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
   }
 
-
+  // when a message is sent
   const sendMessage = (e) => {
     if (e.key === 'Enter') {
       const msg = e.target.value;
 
       if (msg) {
-        socket.emit('BE-send-message', { roomId, msg, sender: currentUser });
+        socket.emit('message-sent', { roomId, msg, sender: currentUser });
         inputRef.current.value = '';
       }
     }
   };
 
   return (
-    
+    // Display chat window only when the chat button is clicked
     <ChatContainer className={display ? '' : 'width0'}>
-    
-      <TopHeader>Chat Room</TopHeader>
-      <ChatArea>
-        
+
+      <Titlebox>Chat Room</Titlebox>
+
+      <ChatWindow>
+        {/* Section where all the sent messages are displayed */}
         <MessageList>
           {msg &&
             msg.map(({ sender, msg }, idx) => {
@@ -62,42 +63,37 @@ const Chat = ({ display, roomId }) => {
                 );
               }
             })}
-            
-            <div style={{float:'left', clear: 'both'}} ref={messagesEndRef} />
+
+          <div style={{ float: 'left', clear: 'both' }} ref={messagesEndRef} />
         </MessageList>
 
-      </ChatArea>
+      </ChatWindow>
 
-      <BottomInput
+      {/* input box where message can be typed */}
+      <InputArea
         ref={inputRef}
         onKeyUp={sendMessage}
         placeholder="Enter your message"
       />
-          
+
     </ChatContainer>
   );
 };
 
+// -------------------------------------------------------------------------
+// Styled Components:
+
 const ChatContainer = styled.div`
+  background-color: #d1d1f5;
   display: flex;
   flex-direction: column;
   width: 30%;
   hieght: 100%;
-  background-color: #d1d1f5;
   transition: all 0.5s ease;
   overflow: hidden;
 `;
 
-const TopHeader = styled.div`
-  width: 100%;
-  text-align: center;
-  margin-top: 15px;
-  font-weight: 600;
-  font-size: 20px;
-  color: black;
-`;
-
-const ChatArea = styled.div`
+const ChatWindow = styled.div`
   width: 100%;
   height: 83%;
   max-height: 83%;
@@ -105,12 +101,13 @@ const ChatArea = styled.div`
   overflow-y: auto;
 `;
 
-const MessageList = styled.div`
-  display: flex;
+const Titlebox = styled.div`
   width: 100%;
-  flex-direction: column;
-  padding: 15px;
-  color: #454552;
+  text-align: center;
+  margin-top: 15px;
+  font-weight: 600;
+  font-size: 20px;
+  color: black;
 `;
 
 const Message = styled.div`
@@ -137,6 +134,14 @@ const Message = styled.div`
     box-shadow: 0px 0px 3px #6264a7;
     font-size: 14px;
   }
+`;
+
+const MessageList = styled.div`
+  display: flex;
+  width: 100%;
+  color: #454552;
+  flex-direction: column;
+  padding: 15px;
 `;
 
 const UserMessage = styled.div`
@@ -167,7 +172,7 @@ const UserMessage = styled.div`
   }
 `;
 
-const BottomInput = styled.input`
+const InputArea = styled.input`
   bottom: 0;
   width: 100%;
   height: 8%;

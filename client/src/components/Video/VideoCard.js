@@ -1,6 +1,7 @@
+//imports
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-
+//-----------------------------------------------------------------------------
 
 const VideoCard = (props) => {
   const ref = useRef();
@@ -23,6 +24,8 @@ const VideoCard = (props) => {
   );
 };
 
+//-------------------------------------------------------------------------------
+// styled components:
 
 const Video = styled.video``;
 

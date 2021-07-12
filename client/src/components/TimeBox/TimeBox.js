@@ -1,5 +1,7 @@
+//imports
 import  React, { useState , useEffect } from 'react';
 import styled from 'styled-components';
+//---------------------------------------------------------------------------
 
 export const TimeBox = () => {
 
@@ -19,6 +21,9 @@ export const TimeBox = () => {
         </Timecontainer>
     )
 };
+
+//-------------------------------------------------------------------------------
+// styled components:
 
 const Timecontainer = styled.div`
   color: white;

@@ -1,12 +1,17 @@
 const express = require('express');
 const app = express();
 const http = require('http').createServer(app);
+
+//creates a new socket.io instance attached to the http server. 
 const io = require('socket.io')(http);
-const PORT = process.env.PORT || 3001;
+
+const PORT = process.env.PORT || 3000;
 const path = require('path');
+//----------------------------------------------------------------------
 
 let socketList = {};
 
+// specify path for static files
 app.use(express.static(path.join(__dirname, 'public')));
 
 if (process.env.NODE_ENV === 'production') {
@@ -17,7 +22,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-// Route
+// Routing
 app.get('/ping', (req, res) => {
   res
     .send({
@@ -26,33 +31,32 @@ app.get('/ping', (req, res) => {
     .status(200);
 });
 
-// Socket
+// Code to execute whenever someone connects
 io.on('connection', (socket) => {
   console.log(`New User connected: ${socket.id}`);
 
+  // Code to execute whenever someone disconnects
   socket.on('disconnect', () => {
     socket.disconnect();
     console.log('User disconnected!');
   });
 
-  socket.on('BE-check-user', ({ roomId, userName }) => {
+  // check for duplicate username and generate error
+  socket.on('check-user', ({ roomId, userName }) => {
     let error = false;
-
+    
     io.sockets.in(roomId).clients((err, clients) => {
       clients.forEach((client) => {
         if (socketList[client] == userName) {
           error = true;
         }
       });
-      socket.emit('FE-error-user-exist', { error });
+      socket.emit('duplicate-user', { error });
     });
   });
 
-  /**
-   * Join Room
-   */
-  socket.on('BE-join-room', ({ roomId, userName }) => {
-    // Socket Join RoomName
+  // Joining a room
+  socket.on('room-joined', ({ roomId, userName }) => {
     socket.join(roomId);
     socketList[socket.id] = { userName, video: true, audio: true };
 
@@ -61,45 +65,48 @@ io.on('connection', (socket) => {
       try {
         const users = [];
         clients.forEach((client) => {
-          // Add User List
+          // Add to user List
           users.push({ userId: client, info: socketList[client] });
         });
-        socket.broadcast.to(roomId).emit('FE-user-join', users);
-        // io.sockets.in(roomId).emit('FE-user-join', users);
+        socket.broadcast.to(roomId).emit('user-joined', users);
+        
       } catch (e) {
-        io.sockets.in(roomId).emit('FE-error-user-exist', { err: true });
+        io.sockets.in(roomId).emit('duplicate-user', { err: true });
       }
     });
   });
 
-  socket.on('BE-call-user', ({ userToCall, from, signal }) => {
-    io.to(userToCall).emit('FE-receive-call', {
+  socket.on('call-user', ({ userToCall, from, signal }) => {
+    io.to(userToCall).emit('receiving-call', {
       signal,
       from,
       info: socketList[socket.id],
     });
   });
 
-  socket.on('BE-accept-call', ({ signal, to }) => {
-    io.to(to).emit('FE-call-accepted', {
+  socket.on('call-accepted', ({ signal, to }) => {
+    io.to(to).emit('accept-call', {
       signal,
       answerId: socket.id,
     });
   });
 
-  socket.on('BE-send-message', ({ roomId, msg, sender }) => {
-    io.sockets.in(roomId).emit('FE-receive-message', { msg, sender });
+  // sending chat message
+  socket.on('message-sent', ({ roomId, msg, sender }) => {
+    io.sockets.in(roomId).emit('message-received', { msg, sender });
   });
 
-  socket.on('BE-leave-room', ({ roomId, leaver }) => {
+  // leaving the meeting
+  socket.on('leaving-room', ({ roomId, leaver }) => {
     delete socketList[socket.id];
     socket.broadcast
       .to(roomId)
-      .emit('FE-user-leave', { userId: socket.id, userName: [socket.id] });
+      .emit('user-left', { userId: socket.id, userName: [socket.id] });
     io.sockets.sockets[socket.id].leave(roomId);
   });
 
-  socket.on('BE-toggle-camera-audio', ({ roomId, switchTarget }) => {
+  // toggling the audio-video on-off
+  socket.on('toggling-camera-audio', ({ roomId, switchTarget }) => {
     if (switchTarget === 'video') {
       socketList[socket.id].video = !socketList[socket.id].video;
     } else {
@@ -107,10 +114,11 @@ io.on('connection', (socket) => {
     }
     socket.broadcast
       .to(roomId)
-      .emit('FE-toggle-camera', { userId: socket.id, switchTarget });
+      .emit('toggled-camera', { userId: socket.id, switchTarget });
   });
 });
 
+// make the server listen to the specified port
 http.listen(PORT, () => {
-  console.log('Connected : 3001');
+  console.log('Connected : 3000');
 });

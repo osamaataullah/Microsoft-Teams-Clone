@@ -20,23 +20,23 @@ html,body {
 }
 
 .myButton {
-	box-shadow: 0px 12px 15px -7px #CF6E52;
-	background:linear-gradient(to bottom, #FBB048 5%, #F58152 100%);
-        background-color: #FBB048;
+	box-shadow: 0px 12px 15px -7px #3e7327;
+	background:linear-gradient(to bottom, #77b55a 5%, #72b352 100%);
+	background-color:#77b55a;
 	border-radius:10px;
-        border:1px solid #F58650;
+	border:1px solid #48633a;
 	cursor:pointer;
-	color:white;
+	color:#ffffff;
 	font-family:Arial;
 	font-size:15px;
 	font-weight:bold;
 	padding:9px 20px;
 	text-decoration:none;
-	text-shadow:0px 1px 0px #F58650;
+	text-shadow:0px 1px 0px #5b8a3c;
 }
 .myButton:hover {
-	background:linear-gradient(to bottom, #F58152 5%, #FBB048 100%);
-	background-color:#FBB048;
+	background:linear-gradient(to bottom, #72b352 5%, #77b55a 100%);
+	background-color:#72b352;
 }
 .myButton:active {
 	position:relative;

@@ -1,13 +1,13 @@
-
+//imports
 import React, { useState, useEffect, useRef } from 'react';
 import Peer from 'simple-peer';
 import styled from 'styled-components';
 import socket from '../../socket';
+import UpperBar from '../UpperBar/UpperBar';
 import VideoCard from '../Video/VideoCard';
 import BottomBar from '../BottomBar/BottomBar';
 import Chat from '../Chat/Chat';
-import UpperBar from '../UpperBar/UpperBar';
-
+//--------------------------------------------------------------------------------
 
 const MeetRoom = (props) => {
   const currentUser = sessionStorage.getItem('user');
@@ -32,9 +32,7 @@ const MeetRoom = (props) => {
       setVideoDevices(filtered);
     });
 
-
     window.addEventListener('popstate', goToBack);
-
 
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
@@ -42,9 +40,10 @@ const MeetRoom = (props) => {
         userVideoRef.current.srcObject = stream;
         userStream.current = stream;
 
-        socket.emit('BE-join-room', { roomId, userName: currentUser });
-        socket.on('FE-user-join', (users) => {
-         
+        // user joins room
+        socket.emit('room-joined', { roomId, userName: currentUser });
+        socket.on('user-joined', (users) => {
+
           const peers = [];
           users.forEach(({ userId, info }) => {
             let { userName, video, audio } = info;
@@ -74,7 +73,8 @@ const MeetRoom = (props) => {
           setPeers(peers);
         });
 
-        socket.on('FE-receive-call', ({ signal, from, info }) => {
+
+        socket.on('receiving-call', ({ signal, from, info }) => {
           let { userName, video, audio } = info;
           const peerIdx = findPeer(from);
 
@@ -100,12 +100,15 @@ const MeetRoom = (props) => {
           }
         });
 
-        socket.on('FE-call-accepted', ({ signal, answerId }) => {
+
+        socket.on('accept-call', ({ signal, answerId }) => {
           const peerIdx = findPeer(answerId);
           peerIdx.peer.signal(signal);
         });
 
-        socket.on('FE-user-leave', ({ userId, userName }) => {
+
+        // when user leaves the meeting
+        socket.on('user-left', ({ userId, userName }) => {
           const peerIdx = findPeer(userId);
           peerIdx.peer.destroy();
           setPeers((users) => {
@@ -115,7 +118,9 @@ const MeetRoom = (props) => {
         });
       });
 
-    socket.on('FE-toggle-camera', ({ userId, switchTarget }) => {
+
+      // toggling video-audio on-off
+    socket.on('toggled-camera', ({ userId, switchTarget }) => {
       const peerIdx = findPeer(userId);
 
       setUserVideoAudio((preList) => {
@@ -132,11 +137,13 @@ const MeetRoom = (props) => {
       });
     });
 
+
     return () => {
       socket.disconnect();
     };
 
   }, []);
+
 
   function createPeer(userId, caller, stream) {
     const peer = new Peer({
@@ -146,7 +153,7 @@ const MeetRoom = (props) => {
     });
 
     peer.on('signal', (signal) => {
-      socket.emit('BE-call-user', {
+      socket.emit('call-user', {
         userToCall: userId,
         from: caller,
         signal,
@@ -159,6 +166,7 @@ const MeetRoom = (props) => {
     return peer;
   }
 
+
   function addPeer(incomingSignal, callerId, stream) {
     const peer = new Peer({
       initiator: false,
@@ -167,7 +175,7 @@ const MeetRoom = (props) => {
     });
 
     peer.on('signal', (signal) => {
-      socket.emit('BE-accept-call', { signal, to: callerId });
+      socket.emit('call-accepted', { signal, to: callerId });
     });
 
     peer.on('disconnect', () => {
@@ -179,13 +187,15 @@ const MeetRoom = (props) => {
     return peer;
   }
 
+
   function findPeer(id) {
     return peersRef.current.find((p) => p.peerID === id);
   }
 
+
   function createUserVideo(peer, index, arr) {
     return (
-      <VideoBox
+      <VideoWindow
         className={`width-peer${peers.length > 8 ? '' : peers.length}`}
         onClick={expandScreen}
         key={index}
@@ -193,10 +203,12 @@ const MeetRoom = (props) => {
         {writeUserName(peer.userName)}
         <FaIcon className='fas fa-expand' />
         <VideoCard key={index} peer={peer} number={arr.length} />
-      </VideoBox>
+      </VideoWindow>
     );
   }
 
+
+  // displays usernames on users window if their video is turned off
   function writeUserName(userName, index) {
     if (userVideoAudio.hasOwnProperty(userName)) {
       if (!userVideoAudio[userName].video) {
@@ -206,20 +218,22 @@ const MeetRoom = (props) => {
   }
 
 
-  const clickChat = (e) => {
+  // display chat window when chat button is pressed
+  const openChat = (e) => {
     e.stopPropagation();
     setDisplayChat(!displayChat);
   };
 
 
+  // return the user back to home page when leave button is pressed
   const goToBack = (e) => {
     e.preventDefault();
-    socket.emit('BE-leave-room', { roomId, leaver: currentUser });
+    socket.emit('leaving-room', { roomId, leaver: currentUser });
     sessionStorage.removeItem('user');
     window.location.href = '/';
   };
 
-  
+
   const toggleCameraAudio = (e) => {
     const target = e.target.getAttribute('data-switch');
 
@@ -248,11 +262,11 @@ const MeetRoom = (props) => {
       };
     });
 
-    socket.emit('BE-toggle-camera-audio', { roomId, switchTarget: target });
+    socket.emit('toggling-camera-audio', { roomId, switchTarget: target });
   };
 
-
-  const clickScreenSharing = () => {
+  // when screen share button is pressed
+  const startScreenSharing = () => {
     if (!screenShare) {
       navigator.mediaDevices
         .getDisplayMedia({ cursor: true })
@@ -260,7 +274,7 @@ const MeetRoom = (props) => {
           const screenTrack = stream.getTracks()[0];
 
           peersRef.current.forEach(({ peer }) => {
-            // replaceTrack (oldTrack, newTrack, oldStream);
+            
             peer.replaceTrack(
               peer.streams[0]
                 .getTracks()
@@ -294,6 +308,7 @@ const MeetRoom = (props) => {
     }
   };
 
+  // full screen view when user clicks on video window
   const expandScreen = (e) => {
     const elem = e.target;
 
@@ -312,19 +327,21 @@ const MeetRoom = (props) => {
   };
 
   const clickBackground = () => {
-    if(!showVideoDevices) return;
+    if (!showVideoDevices) return;
 
     setShowVideoDevices(false);
   }
 
   return (
     <RoomContainer onClick={clickBackground}>
-      
+
       <VideoAndBarContainer>
-      <UpperBar MeetTitle={roomId} MemberCount={`${peers.length+1}`}/>
+
+        <UpperBar MeetTitle={roomId} MemberCount={`${peers.length + 1}`} />
+
         <VideoContainer>
-     
-          <VideoBox
+
+          <VideoWindow
             className={`width-peer${peers.length > 8 ? '' : peers.length}`}
           >
             {userVideoAudio['localUser'].video ? null : (
@@ -338,14 +355,15 @@ const MeetRoom = (props) => {
               autoPlay
               playInline
             ></MyVideo>
-          </VideoBox>
-     
+          </VideoWindow>
+
           {peers &&
             peers.map((peer, index, arr) => createUserVideo(peer, index, arr))}
         </VideoContainer>
+
         <BottomBar
-          clickScreenSharing={clickScreenSharing}
-          clickChat={clickChat}
+          startScreenSharing={startScreenSharing}
+          openChat={openChat}
           goToBack={goToBack}
           toggleCameraAudio={toggleCameraAudio}
           userVideoAudio={userVideoAudio['localUser']}
@@ -354,11 +372,24 @@ const MeetRoom = (props) => {
           showVideoDevices={showVideoDevices}
           setShowVideoDevices={setShowVideoDevices}
         />
+
       </VideoAndBarContainer>
+
       <Chat display={displayChat} roomId={roomId} />
+
     </RoomContainer>
   );
 };
+
+//---------------------------------------------------------------------------------------------------
+// styled components:
+
+const FaIcon = styled.i`
+  display: none;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+`;
 
 const RoomContainer = styled.div`
   display: flex;
@@ -366,6 +397,12 @@ const RoomContainer = styled.div`
   max-height: 100vh;
   flex-direction: row;
   background-color: #f0f0f0;
+`;
+
+const VideoAndBarContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100vh;
 `;
 
 const VideoContainer = styled.div`
@@ -381,19 +418,14 @@ const VideoContainer = styled.div`
   gap: 10px;
 `;
 
-const VideoAndBarContainer = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100vh;
-`;
-
 const MyVideo = styled.video``;
 
-const VideoBox = styled.div`
+const VideoWindow = styled.div`
+  justify-content: center;
+  align-items: center;  
   position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  
   > video {
     top: 0;
     left: 0;
@@ -412,13 +444,6 @@ const UserName = styled.div`
   position: absolute;
   font-size: calc(20px + 5vmin);
   z-index: 1;
-`;
-
-const FaIcon = styled.i`
-  display: none;
-  position: absolute;
-  right: 15px;
-  top: 15px;
 `;
 
 export default MeetRoom;

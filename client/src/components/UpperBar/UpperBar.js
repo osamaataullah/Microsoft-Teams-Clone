@@ -1,14 +1,15 @@
-
+// imports
 import React from 'react';
 import styled from 'styled-components';
 import TimeBox from '../TimeBox/TimeBox.js';
+//-------------------------------------------------------------------------------
 
 const UpperBar = ({
     MeetTitle,
     MemberCount
 }) => {
-    
-    return(
+
+    return (
         <Bar>
             <Center>
                 <Title>
@@ -24,7 +25,8 @@ const UpperBar = ({
     );
 };
 
-
+//------------------------------------------------------------------------------------
+// styled components:
 
 const Bar = styled.div`
   position: absolute;
@@ -44,12 +46,12 @@ const Center = styled.div`
   display: flex;
 `;
 
-const Title= styled.div`
+const Title = styled.div`
   color: white;
 `;
 const Right = styled.div`
-color:white;
-margin-right: 20px;
+  color:white;
+  margin-right: 20px;
 `;
 
 export default UpperBar;
