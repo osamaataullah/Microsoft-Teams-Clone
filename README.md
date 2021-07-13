@@ -69,14 +69,20 @@ Features to be implemented:
 - Adding emoticons in chat messages
 - Automatic text wrapping in chat messages
 ***
-**Additional Sources:**
+### Additional Sources:
 
 🏠 **Home Page Template**: https://templatemo.com/tm-535-softy-pinko  </br>
 🖌️ **Open Source Vector Images**: https://undraw.co/ , https://www.freepik.com/</br>
 ⭐ **Icons**: https://fontawesome.com/v5.15/icons?d=gallery&p=2
 
 ***
-**Local Setup:**
+### Tips for usage:
+- Works well with two browser tabs or devices on the same network.
+- May take a little extra time to load when accessing for the first time.
+
+***
+
+### Local Setup:
 
 - Clone this repo to your local machine using `https://github.com/AJgthb2002/WeTalk.git`
 
