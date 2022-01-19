@@ -86,7 +86,15 @@ Features to be implemented:
 
 - Clone this repo to your local machine using `https://github.com/AJgthb2002/WeTalk.git`
 
-- Move to client folder, install the required packages
+- Move to server folder, install the required packages, and start the server
+<pre>
+  <code>
+    npm install
+    node index.js
+  </code>
+</pre>
+
+- Move to client folder, install the required packages, and run
 <pre>
   <code>
     npm install
@@ -94,15 +102,7 @@ Features to be implemented:
   </code>
 </pre>
 
-- Move to server folder, install the required packages
-<pre>
-  <code>
-    npm install
-    npm run dev
-  </code>
-</pre>
-
-- Open your local host port 3000 from your browser
+- In case the website does not open automatically, open your local host port 3000 from your browser
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
