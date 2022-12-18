@@ -127,7 +127,7 @@ app.get('*', (req, res) => {
 
 // make the server listen to the specified port
 http.listen(PORT, () => {
-  console.log('Connected : 3000');
+  console.log('Connected : 3000 or PORT');
 });
 
 

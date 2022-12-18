@@ -9,7 +9,7 @@
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Ananya Joshi",
+  "author": "Osama",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
