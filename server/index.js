@@ -118,7 +118,16 @@ io.on('connection', (socket) => {
   });
 });
 
+app.use(express.static(path.join(__dirname, "/client/build")));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
+});
+
+
 // make the server listen to the specified port
 http.listen(PORT, () => {
   console.log('Connected : 3000');
 });
+
+
