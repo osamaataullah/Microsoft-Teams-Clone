@@ -1,5 +1,5 @@
 # Microsoft-Teams-Clone
-Developed Microsoft Teams Clone -- the ultimate messaging app for teams as a part of course "Cloud Computing (CSE-569)".
+Microsoft Teams Clone -- the ultimate messaging app for teams.
 It is a workspace for real-time collaboration, communication and meetings. It is open to use on any browser and accessible to everyone.
 
 ### Screenshots:
